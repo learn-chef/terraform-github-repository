@@ -20,18 +20,14 @@ resource "github_repository" "this" {
   vulnerability_alerts   = false
 }
 
-resource "github_branch" "default" {
+
+resource "github_branch_default" "default" {
   repository = github_repository.this.name
   branch     = "main"
 }
 
-resource "github_branch_default" "default" {
-  repository = github_repository.this.name
-  branch     = github_branch.default.branch
-}
-
 resource "github_branch_protection" "default" {
   repository_id = github_repository.this.node_id
-  pattern       = github_branch.default.branch
+  pattern       = "main"
   depends_on    = [github_repository.this]
 }
