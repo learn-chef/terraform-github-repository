@@ -27,7 +27,7 @@ resource "github_branch_default" "default" {
 }
 
 resource "github_branch_protection" "default" {
-  repository_id = github_repository.this.node_id
+  repository_id = github_repository.this.name
   pattern       = "main"
   depends_on    = [github_repository.this]
 }
